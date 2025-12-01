@@ -1,0 +1,28 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "16ace565-4a6f-4fc0-907a-754c7eb795b6",
+        "clusterUri": "https://trd-9z1ssb9kwu4sbtft24.z2.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "f4e823ae-30df-48dd-ac1a-abdc626dd427",
+        "databaseItemName": "kql_01_event"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "480d0aa7-c7c1-43c2-8a27-720bd75c12c1",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data.\nYOUR_TABLE_HERE\n| take 100\n\n// See how many records are in the table.\nYOUR_TABLE_HERE\n| count\n\n// This query returns the number of ingestions per hour in the given table.\nYOUR_TABLE_HERE\n| summarize IngestionCount = count() by bin(ingestion_time(), 1h)\n\n",
+        "title": "Tab",
+        "dataSourceId": "16ace565-4a6f-4fc0-907a-754c7eb795b6"
+      },
+      {
+        "id": "e305f21b-8e5f-4943-9bdb-3873f91abd54",
+        "content": "// Use 'take' to view a sample number of records in the table and check the data.\nbikes\n| take 100\n\nbikes\n| summarize TotalBikes = sum(No_Bikes) by Neighbourhood, Street\n\nbikes\n| filter No_Empty_Docks > 10\n\nbikes\n| order by No_Bikes desc\n\nbikes\n| summarize contagem = count_distinct(Street)\n\nbikes\n| summarize count()\n\nbikes\n|where No_Bikes == 1\n|take 2\n|extend Duplo = No_Bikes * 2 \n|project Street, No_Bikes, Duplo\n\nbikes\n| where No_Bikes > 5\n| summarize TotalPoints = count() by Neighbourhood\n\nbikes\n| summarize AvgDocks = round(avg(No_Empty_Docks),2) by Neighbourhood\n\nbikes\n| summarize Points_No = max(No_Bikes) by BikepointID\n| sort by Points_No desc \n| limit 3\n\nbikes\n| where Neighbourhood == \"St. John's Wood\" and Latitude > 51.53\n\nbikes\n| extend TotalSlots = No_Bikes + No_Empty_Docks\n\nbikes\n| where Latitude between (51.25 .. 51.530)\n\nbikes\n| where Latitude >= 51.525 and Latitude <= 51.530\n\nbikes\n| extend Proporcao = round(No_Bikes/(No_Bikes + No_Empty_Docks),2)\n\nbikes\n| summarize TotalDocks = sum(No_Empty_Docks) by Neighbourhood\n| order by TotalDocks desc\n| take 1\n\nbikes\n| where Neighbourhood in (\"Old Ford\", \"London Bridge\")\n\nbikes\n| summarize AvgBikes = round(avg(No_Bikes),2) by Street\n",
+        "title": "",
+        "dataSourceId": "16ace565-4a6f-4fc0-907a-754c7eb795b6"
+      }
+    ]
+  }
+}
